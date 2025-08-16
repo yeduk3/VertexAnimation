@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5516E6D32E50D81800878EAA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516E6D22E50D81800878EAA /* OpenGL.framework */; };
+		5516E6E22E50D95300878EAA /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516E6E02E50D95300878EAA /* libGLEW.2.2.0.dylib */; };
+		5516E6E32E50D95300878EAA /* libGLEW.2.2.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 5516E6E02E50D95300878EAA /* libGLEW.2.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5516E6E42E50D95300878EAA /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5516E6E12E50D95300878EAA /* libglfw.3.4.dylib */; };
+		5516E6E52E50D95300878EAA /* libglfw.3.4.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 5516E6E12E50D95300878EAA /* libglfw.3.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		5516E6C52E50D45500878EAA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -16,16 +24,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		5516E6E62E50D95300878EAA /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5516E6E32E50D95300878EAA /* libGLEW.2.2.0.dylib in Embed Libraries */,
+				5516E6E52E50D95300878EAA /* libglfw.3.4.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5516E6C72E50D45500878EAA /* VertexAnimation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VertexAnimation; sourceTree = BUILT_PRODUCTS_DIR; };
+		5516E6D22E50D81800878EAA /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		5516E6D42E50D81C00878EAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5516E6E02E50D95300878EAA /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../YGL/library/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
+		5516E6E12E50D95300878EAA /* libglfw.3.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.4.dylib; path = ../../../YGL/library/libglfw.3.4.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5516E6C92E50D45500878EAA /* VertexAnimation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = VertexAnimation;
+			sourceTree = "<group>";
+		};
+		5516E74C2E50D9EF00878EAA /* horse-gallop */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "horse-gallop";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -35,6 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5516E6E42E50D95300878EAA /* libglfw.3.4.dylib in Frameworks */,
+				5516E6D32E50D81800878EAA /* OpenGL.framework in Frameworks */,
+				5516E6E22E50D95300878EAA /* libGLEW.2.2.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +76,9 @@
 		5516E6BE2E50D45500878EAA = {
 			isa = PBXGroup;
 			children = (
+				5516E74C2E50D9EF00878EAA /* horse-gallop */,
 				5516E6C92E50D45500878EAA /* VertexAnimation */,
+				5516E6D12E50D81800878EAA /* Frameworks */,
 				5516E6C82E50D45500878EAA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +91,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5516E6D12E50D81800878EAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5516E6E02E50D95300878EAA /* libGLEW.2.2.0.dylib */,
+				5516E6E12E50D95300878EAA /* libglfw.3.4.dylib */,
+				5516E6D42E50D81C00878EAA /* Cocoa.framework */,
+				5516E6D22E50D81800878EAA /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -67,6 +112,7 @@
 				5516E6C32E50D45500878EAA /* Sources */,
 				5516E6C42E50D45500878EAA /* Frameworks */,
 				5516E6C52E50D45500878EAA /* CopyFiles */,
+				5516E6E62E50D95300878EAA /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -74,6 +120,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				5516E6C92E50D45500878EAA /* VertexAnimation */,
+				5516E74C2E50D9EF00878EAA /* horse-gallop */,
 			);
 			name = VertexAnimation;
 			packageProductDependencies = (
@@ -249,6 +296,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 488U7L9D53;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /Users/gyu/Desktop/YGL/include;
+				LIBRARY_SEARCH_PATHS = /Users/gyu/Desktop/YGL/library;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -259,6 +308,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 488U7L9D53;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /Users/gyu/Desktop/YGL/include;
+				LIBRARY_SEARCH_PATHS = /Users/gyu/Desktop/YGL/library;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
