@@ -44,6 +44,7 @@
 		5516E6D42E50D81C00878EAA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5516E6E02E50D95300878EAA /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../YGL/library/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
 		5516E6E12E50D95300878EAA /* libglfw.3.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.4.dylib; path = ../../../YGL/library/libglfw.3.4.dylib; sourceTree = "<group>"; };
+		5516E7522E51901600878EAA /* HorseGallop.yao */ = {isa = PBXFileReference; lastKnownFileType = text; path = HorseGallop.yao; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -76,6 +77,7 @@
 		5516E6BE2E50D45500878EAA = {
 			isa = PBXGroup;
 			children = (
+				5516E7522E51901600878EAA /* HorseGallop.yao */,
 				5516E74C2E50D9EF00878EAA /* horse-gallop */,
 				5516E6C92E50D45500878EAA /* VertexAnimation */,
 				5516E6D12E50D81800878EAA /* Frameworks */,
