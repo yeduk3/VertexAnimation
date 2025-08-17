@@ -182,7 +182,7 @@ AnimatedObj animatedObj("HorseGallop.yao");
 void init() {
     shader.loadShader("VertexAnimation/va.vert", "VertexAnimation/va.frag");
     animatedObj.loadYAObj();
-    animatedObj.setCPS(10);
+    animatedObj.setCPS(3);
     
     camera.setPosition({0, 0, 5});
     camera.glfwSetCallbacks(window->getGLFWWindow());
