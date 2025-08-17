@@ -126,7 +126,7 @@ public:
     
     void setCPS(const float& cps) { _cps = cps; }
     
-    int nextSaved = 1;
+    int nextSaved = -1;
     GLuint vao = -1, posvbo[2], norvbo[2], veo;
     void render(const float& t) {
         float period = glm::fract(t/_cps)*poses.size();
@@ -135,10 +135,6 @@ public:
         
         shader.use();
         shader.setUniform("interTime", glm::min(1.f, glm::max(0.f, (period-cur)/(next-cur))));
-        
-        if(nextSaved == cur) {
-            nextSaved = next;
-        }
         
         if(vao == -1) {
             glGenVertexArrays(1, &vao);
@@ -156,25 +152,33 @@ public:
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces.size()*sizeof(glm::u16vec3), faces.data(), GL_STATIC_DRAW);
         }
+        
+        if(nextSaved < 0 || nextSaved == cur) {
+            std::cout<< "Updated frame: " << cur << ", " << next << std::endl;
+            nextSaved = next;
+            glBindVertexArray(vao);
+            glBindBuffer(GL_ARRAY_BUFFER, posvbo[0]);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, poses[cur].p.size()*sizeof(glm::vec3), poses[cur].p.data());
+            glEnableVertexAttribArray(0);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
+            glBindBuffer(GL_ARRAY_BUFFER, norvbo[0]);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, poses[cur].n.size()*sizeof(glm::vec3), poses[cur].n.data());
+            glEnableVertexAttribArray(1);
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
+            glBindBuffer(GL_ARRAY_BUFFER, posvbo[1]);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, poses[next].p.size()*sizeof(glm::vec3), poses[next].p.data());
+            glEnableVertexAttribArray(2);
+            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
+            glBindBuffer(GL_ARRAY_BUFFER, norvbo[0]);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, poses[next].n.size()*sizeof(glm::vec3), poses[next].n.data());
+            glEnableVertexAttribArray(3);
+            glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
+        }
+        
         glBindVertexArray(vao);
-        glBindBuffer(GL_ARRAY_BUFFER, posvbo[0]);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, poses[cur].p.size()*sizeof(glm::vec3), poses[cur].p.data());
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
-        glBindBuffer(GL_ARRAY_BUFFER, norvbo[0]);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, poses[cur].n.size()*sizeof(glm::vec3), poses[cur].n.data());
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
-        glBindBuffer(GL_ARRAY_BUFFER, posvbo[1]);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, poses[next].p.size()*sizeof(glm::vec3), poses[next].p.data());
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
-        glBindBuffer(GL_ARRAY_BUFFER, norvbo[0]);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, poses[next].n.size()*sizeof(glm::vec3), poses[next].n.data());
-        glEnableVertexAttribArray(3);
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
-        glDrawElements(GL_TRIANGLES, faces.size()*3, GL_UNSIGNED_SHORT, 0);
+        glDrawElements(GL_TRIANGLES, static_cast<int>(faces.size()*3), GL_UNSIGNED_SHORT, 0);
     }
 };
 AnimatedObj animatedObj("HorseGallop.yao");
@@ -182,7 +186,7 @@ AnimatedObj animatedObj("HorseGallop.yao");
 void init() {
     shader.loadShader("VertexAnimation/va.vert", "VertexAnimation/va.frag");
     animatedObj.loadYAObj();
-    animatedObj.setCPS(3);
+    animatedObj.setCPS(5);
     
     camera.setPosition({0, 0, 5});
     camera.glfwSetCallbacks(window->getGLFWWindow());
@@ -196,7 +200,9 @@ void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glm::mat4 V = camera.lookAt();
     shader.setUniform("NormalMatrix", glm::mat3(V[0], V[1], V[2]));
+    shader.setUniform("viewMat", V);
     shader.setUniform("MVP", camera.perspective(window->aspect(), 0.1f, 1000.f)*V);
+    glfwSwapInterval(1);
     t = glfwGetTime();
     animatedObj.render(t);
 }

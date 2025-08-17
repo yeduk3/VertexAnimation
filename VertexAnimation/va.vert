@@ -15,10 +15,14 @@ layout(location = 3) in vec3 Nor2;
 uniform float interTime;
 uniform mat4 MVP;
 uniform mat3 NormalMatrix;
+uniform mat4 viewMat;
 
 out vec3 Normal;
+out vec4 VPos;
 
 void main() {
-    gl_Position = MVP * vec4(mix(Pos1, Pos2, interTime), 1);
+    vec3 Pos = mix(Pos1, Pos2, interTime);
+    gl_Position = MVP * vec4(Pos, 1);
+    VPos = viewMat * vec4(Pos, 1);
     Normal = NormalMatrix * mix(Nor1, Nor2, interTime);
 }
